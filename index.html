@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samay</title>
+  <meta name="description"
+    content="Samay — a precision world clock dashboard. Track time across cities with clarity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="shell">
+
+    <div class="card">
+
+      <!-- ── NAV ───────────────────────────── -->
+      <header class="nav">
+        <div class="brand">
+          <svg class="brand-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="9.5" stroke="currentColor" stroke-width="1.8" />
+            <line x1="11" y1="4.5" x2="11" y2="11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="11" y1="11" x2="14.5" y2="13.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <circle cx="11" cy="11" r="1.3" fill="currentColor" />
+          </svg>
+          <span class="brand-name">Samay</span>
+        </div>
+
+        <div class="nav-search">
+          <div class="search-box">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1.4" />
+              <line x1="8.5" y1="8.5" x2="12.5" y2="12.5" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" />
+            </svg>
+            <input type="text" id="search-input" class="search-input" placeholder="Search city…" autocomplete="off" />
+            <div class="search-dropdown" id="search-dropdown"></div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <div class="fmt-group" role="group" aria-label="Time format">
+            <button id="btn12" class="fmt-btn" onclick="setFormat(12)">12h</button>
+            <button id="btn24" class="fmt-btn active" onclick="setFormat(24)">24h</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── HERO CLOCK ─────────────────────── -->
+      <section class="hero">
+        <div class="clock-row">
+          <div class="clock" id="main-clock">00:00:00</div>
+          <span class="clock-ampm" id="clock-ampm"></span>
+        </div>
+      </section>
+
+      <!-- ── META BAR ───────────────────────── -->
+      <div class="meta-bar">
+        <span class="meta-date" id="date-str">—</span>
+        <span class="meta-tz" id="tz-label">—</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── LOCATION + ACTION ──────────────── -->
+      <div class="location-row">
+        <h1 class="location-name" id="location-name">—</h1>
+        <div class="location-aside">
+          <p class="tagline">Life moves fast. Stay on time<br>and enjoy every moment.</p>
+          <button class="btn-outline" id="add-btn" onclick="openModal()">
+            Add Another City
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── CITY CARDS ─────────────────────── -->
+      <div class="cards-wrap">
+        <div class="cards" id="cards"></div>
+        <div class="scroll-track" id="scroll-track" style="display:none">
+          <div class="scroll-thumb" id="scroll-thumb"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ADD CITY MODAL ─────────────────────── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modal">
+      <div class="modal-head">
+        <h2 class="modal-title">Add a City</h2>
+        <button class="modal-close" id="modal-close-btn" onclick="closeModal()">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <line x1="1" y1="1" x2="11" y2="11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="11" y1="1" x2="1" y2="11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-search-wrap">
+        <svg class="modal-search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1.4" />
+          <line x1="8.5" y1="8.5" x2="12.5" y2="12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+        <input type="text" id="modal-input" class="modal-search-input" placeholder="Search city or country…"
+          autocomplete="off" />
+      </div>
+      <div class="modal-list" id="modal-list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
